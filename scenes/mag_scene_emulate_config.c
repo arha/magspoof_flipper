@@ -10,18 +10,20 @@ enum MagSettingIndex {
     MagSettingIndexInterpacket,
 };
 
-#define TX_COUNT 4
+#define TX_COUNT 5
 const char* const tx_text[TX_COUNT] = {
     "RFID",
     "A6/A7",
     "434MHz",
     "868MHz",
+    "GPIO 1"
 };
 const uint32_t tx_value[TX_COUNT] = {
     MagTxStateRFID,
     MagTxStateGPIOA6A7,
     MagTxCC1101_434,
     MagTxCC1101_868,
+    MagTx5VOTG,
 
 };
 

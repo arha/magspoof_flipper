@@ -10,6 +10,7 @@
 #include <furi/core/log.h>
 #include <furi_hal_gpio.h>
 #include <furi_hal_resources.h>
+#include <lib/drivers/bq25896.h>
 
 #include <gui/gui.h>
 #include <gui/view.h>

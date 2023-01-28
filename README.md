@@ -49,7 +49,7 @@ Attempting to exploit flipper hardware to some extent
 - [ ] Feed bits from timers
 - [ ] Sync to the lfrfid timer and experiment representing a field flip with a few cycles of a high frequency carrier, like the 125khz lfrfid one. Perhaps mag readers' frontends will lowpass such signals, and keep only the low frequency component, in an attempt to drown out nearby noise?
 - [X] Can the CC1101 radio be used in any way? Driving it from GD0 can achieve 50us, or about 10khz. Probably more with sync/packet mode. **Currently under testing**. The signal is extra noisy with a very wide bandwidth, but, in theory, it can work
-- [ ] Can the 5V pin act as a coil driver? I've read reports it can drive 0.4A, other reports it can drive 2A. It boils down to bq25896 being fast enough. Ref: bq25896_enable_otg, which will probably need bypassing kernel libs and calling furi_hal_i2c_tx/furi_hal_i2c_tx whatever calls from Cube libs.
+- [X] Can the 5V pin act as a coil driver? I've read reports it can drive 0.4A, other reports it can drive 2A. It boils down to bq25896 being fast enough. Ref: bq25896_enable_otg, which will probably need bypassing kernel libs and calling furi_hal_i2c_tx/furi_hal_i2c_tx whatever calls from Cube libs. First attempt at doing this. Needs debugging on a scope, I doubt I2C works right in furi_critical_start()
 - [ ] Investigate transparent mode on 3916
 - [ ] Can the piezo be used at its resonant frequency? I've seen LF signals being emulated with [nothing but headphones](https://github.com/smre/DCF77/blob/master/DCF77.py#L124) running a subharmonic; the wheel brake on some carts seems to react to audiofreq signals (or the RF emission from driving a speaker)
 

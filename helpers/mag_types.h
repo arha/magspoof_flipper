@@ -31,4 +31,5 @@ typedef enum {
     MagTxStateGPIOA6A7,
     MagTxCC1101_434,
     MagTxCC1101_868,
+    MagTx5VOTG
 } MagTxState;

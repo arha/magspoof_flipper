@@ -37,6 +37,18 @@ void bitbang_raw(bool value, MagSetting* setting)
                 furi_hal_gpio_write(&gpio_cc1101_g0, false);
             }
             break;
+        case MagTx5VOTG:
+            if (value)
+            {
+                furi_hal_power_enable_otg();
+                //custom_i2c_tx(0xD6, (const uint8_t*)&bq25896_regs.r03, timeout );
+            }
+            else
+            {
+                furi_hal_power_disable_otg();
+
+            }
+            break;
         default:
             break;
     }
@@ -205,6 +217,10 @@ bool tx_init(MagSetting* setting) {
     case MagTxCC1101_868:
         tx_init_rf(868000000);
         break;
+    case MagTx5VOTG:
+        furi_hal_power_suppress_charge_enter();
+        // furi_hal_power_enable_otg();
+        break;
     default:
         return false;
     }
@@ -224,6 +240,11 @@ bool tx_reset(MagSetting* setting) {
     case MagTxCC1101_434:
     case MagTxCC1101_868:
         tx_deinit_rf();
+        break;
+    case MagTx5VOTG:
+        furi_delay_ms(1);
+        furi_hal_power_disable_otg();
+        furi_hal_power_suppress_charge_exit();
         break;
     default:
         return false;
@@ -346,7 +367,6 @@ void mag_spoof_bitwise(Mag* mag) {
     last_value = 2;
     FURI_CRITICAL_ENTER();
     bool bit = false;
-
 
     if((setting->track == MagTrackStateAll))
     for(uint16_t i = 0; i < ZERO_PREFIX; i++)
